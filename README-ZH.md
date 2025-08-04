@@ -43,8 +43,8 @@ Paste Newbee是一款智能剪贴板工具，可在多设备间实现实时同�
 
 ## 官方链接
 
-- 网站：[https://paste.nbhive.com](https://paste.nbhive.com)
-- 下载：[https://paste.nbhive.com/zh-cn/download](https://paste.nbhive.com/zh-cn/download)
+- 网站：[https://www.nbhive.com](https://www.nbhive.com)
+- 下载：[https://www.nbhive.com/zh-cn/download](https://www.nbhive.com/zh-cn/download)
 - 联系方式：support@nbhive.com
 
 ## 许可证

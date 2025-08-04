@@ -4,7 +4,9 @@ aside: false
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useData, withBase } from 'vitepress'
 
+const { site } = useData()
 const releaseInfo = ref({
   windows: { version: '', size: 0, url: '' },
   macos: { version: '', size: 0, url: '' }
@@ -16,17 +18,28 @@ onMounted(async () => {
     const data = await response.json()
     releaseInfo.value = data
   } catch (error) {
-    console.error('獲取版本信息失敗:', error)
+    console.error('获取版本信息失败:', error)
   }
 })
 
-// 格式化文件大小的函數
+// 格式化文件大小的函数
 const formatSize = (bytes) => {
   return (bytes / (1024 * 1024)).toFixed(2) + ' MB'
 }
+
+// 添加下载处理函数
+const handleDownload = (url, platform) => {
+  // 开始下载
+  window.location.href = url
+  
+  // 延迟跳转到下载完成页面
+  setTimeout(() => {
+    window.location.href = withBase(`/download-complete.html?platform=${platform}`)
+  }, 3000)
+}
 </script>
 
-## 選擇您的平台
+## 选择您的平台
 
 <div class="download-cards">
   <div class="download-card">
@@ -37,12 +50,12 @@ const formatSize = (bytes) => {
       <span>大小：{{ formatSize(releaseInfo.windows.size) }}</span>
     </div>
     <ul class="requirements-list">
-      <li>支援 Windows 10 及以上系統</li>
-      <li>支援 x86/x64 系統</li>
-      <li>自動更新</li>
+      <li>支持 Windows 10 及以上系统</li>
+      <li>支持 x86/x64 系统</li>
+      <li>自动更新</li>
     </ul>
-    <a :href="releaseInfo.windows.url" class="download-button">
-      下載 Windows 版本
+    <a @click.prevent="handleDownload(releaseInfo.windows.url, 'windows')" class="download-button">
+      下载 Windows 版本
     </a>
   </div>
 
@@ -54,38 +67,38 @@ const formatSize = (bytes) => {
       <span>大小：{{ formatSize(releaseInfo.macos.size) }}</span>
     </div>
     <ul class="requirements-list">
-      <li>支援 macOS 10.14 及以上系統</li>
-      <li>支援 Apple Silicon/Intel</li>
-      <li>自動更新</li>
+      <li>支持 macOS 12.0 及以上系统</li>
+      <li>支持 Apple Silicon/Intel</li>
+      <li>自动更新</li>
     </ul>
-    <a :href="releaseInfo.macos.url" class="download-button">
-      下載 macOS 版本
+    <a @click.prevent="handleDownload(releaseInfo.macos.url, 'macos')" class="download-button">
+      下载 macOS 版本
     </a>
   </div>
 </div>
 
-## 系統要求
+## 系统要求
 
 <div class="requirements-card">
-  <h3>Windows 系統要求</h3>
+  <h3>Windows 系统要求</h3>
   <ul class="requirements-list">
     <li>Windows 10 或更高版本</li>
-    <li>最少 4GB 記憶體</li>
-    <li>200MB 可用硬碟空間</li>
-    <li>需要網絡連接以使用同步功能</li>
+    <li>最低 4GB 内存</li>
+    <li>200MB 可用磁盘空间</li>
+    <li>需要网络连接以使用同步功能</li>
   </ul>
 </div>
 
 <div class="requirements-card">
-  <h3>macOS 系統要求</h3>
+  <h3>macOS 系统要求</h3>
   <ul class="requirements-list">
-    <li>macOS 10.14 或更高版本</li>
-    <li>最少 4GB 記憶體</li>
-    <li>200MB 可用硬碟空間</li>
-    <li>需要網絡連接以使用同步功能</li>
+    <li>macOS 12.0 或更高版本</li>
+    <li>最低 4GB 内存</li>
+    <li>200MB 可用磁盘空间</li>
+    <li>需要网络连接以使用同步功能</li>
   </ul>
 </div>
 
 ::: warning 安全提示
-請務必從官方渠道下載 NewbeePaste 以確保安全。所有下載連結均使用 HTTPS 加密傳輸。
+请务必从官方渠道下载 Paste-Newbee 以确保安全。所有下载链接均使用 HTTPS 加密传输。
 :::

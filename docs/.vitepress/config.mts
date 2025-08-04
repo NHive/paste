@@ -1,147 +1,82 @@
 import { defineConfig } from "vitepress";
 
-// 英文配置
-const enConfig = {
-  title: "NewbeePaste",
-  description: "Real-time clipboard sync across devices",
-  themeConfig: {
-    nav: [
-      { text: "Home", link: "/en" },
-      { text: "Guide", link: "/en/guide/getting-started" },
-      { text: "Features", link: "/en/guide/features" },
-      { text: "Download", link: "/en/download" },
-    ],
-    sidebar: {
-      "/en/guide/": [
-        {
-          text: "Introduction",
-          items: [
-            { text: "Getting Started", link: "/en/guide/getting-started" },
-            { text: "Core Features", link: "/en/guide/features" },
-            { text: "Technical Highlights", link: "/en/guide/tech" },
-          ],
-        },
-        {
-          text: "User Guide",
-          items: [
-            { text: "Basic Usage", link: "/en/guide/basic-usage" },
-            { text: "Advanced Features", link: "/en/guide/advanced" },
-            { text: "FAQ", link: "/en/guide/faq" },
-          ],
-        },
-      ],
-    },
-    footer: {
-      message: "NewbeeHive",
-      copyright: "Copyright © 2024-present NewbeePaste",
-    },
-  },
-};
-
-// 中文配置
-const zhConfig = {
-  title: "NewbeePaste",
-  description: "多设备跨平台实时同步剪贴板工具",
-  themeConfig: {
-    nav: [
-      { text: "主页", link: "/zh-cn" },
-      { text: "指南", link: "/zh-cn/guide/getting-started" },
-      { text: "功能", link: "/zh-cn/guide/features" },
-      { text: "下载", link: "/zh-cn/download" },
-    ],
-    sidebar: {
-      "/zh-cn/guide/": [
-        {
-          text: "介绍",
-          items: [
-            { text: "快速开始", link: "/zh-cn/guide/getting-started" },
-            { text: "核心功能", link: "/zh-cn/guide/features" },
-            { text: "技术特点", link: "/zh-cn/guide/tech" },
-          ],
-        },
-        {
-          text: "使用指南",
-          items: [
-            { text: "基础使用", link: "/zh-cn/guide/basic-usage" },
-            { text: "高级功能", link: "/zh-cn/guide/advanced" },
-            { text: "常见问题", link: "/zh-cn/guide/faq" },
-          ],
-        },
-      ],
-    },
-    footer: {
-      message: "NewbeeHive",
-      copyright: "Copyright © 2024-present NewbeePaste",
-    },
-  },
-};
-
-// 繁體中文配置
-const hkConfig = {
-  title: "NewbeePaste",
-  description: "多設備跨平台實時同步剪貼板工具",
-  themeConfig: {
-    nav: [
-      { text: "主頁", link: "/zh-hk" },
-      { text: "指南", link: "/zh-hk/guide/getting-started" },
-      { text: "功能", link: "/zh-hk/guide/features" },
-      { text: "下載", link: "/zh-hk/download" },
-    ],
-    sidebar: {
-      "/zh-hk/guide/": [
-        {
-          text: "介紹",
-          items: [
-            { text: "快速開始", link: "/zh-hk/guide/getting-started" },
-            { text: "核心功能", link: "/zh-hk/guide/features" },
-            { text: "技術特點", link: "/zh-hk/guide/tech" },
-          ],
-        },
-        {
-          text: "使用指南",
-          items: [
-            { text: "基礎使用", link: "/zh-hk/guide/basic-usage" },
-            { text: "高級功能", link: "/zh-hk/guide/advanced" },
-            { text: "常見問題", link: "/zh-hk/guide/faq" },
-          ],
-        },
-      ],
-    },
-    footer: {
-      message: "NewbeeHive",
-      copyright: "Copyright © 2024-present NewbeePaste",
-    },
-  },
-};
-
 // 配置导出
 export default defineConfig({
-  // 多语言配置
-  locales: {
-    root: {
-      label: "English",
-      lang: "en",
-      link: "/en",
-      ...enConfig,
-    },
-    "zh-cn": {
-      label: "简体中文",
-      lang: "zh-CN",
-      link: "/zh-cn/",
-      ...zhConfig,
-    },
-    "zh-hk": {
-      label: "繁體中文",
-      lang: "zh-HK",
-      link: "/zh-hk/",
-      ...hkConfig,
-    },
-  },
+  title: "Paste Newbee",
+  description: "Paste Newbee 是全球唯一支持跨操作系统、跨设备实时同步文本、图片、文件的云剪贴板应用。支持Windows/Mac云剪切板同步，内置OCR、多标签管理、全流程数据加密的网络剪贴板工具，颜值与功能并存。",
+  lang: "zh-CN",
   sitemap: {
     hostname: "https://www.nbhive.com",
+    transformItems: (items) => {
+      // 为关键SEO页面添加更高优先级
+      return items.map((item) => {
+        if (item.url === '/' || item.url === '/index.html') {
+          item.priority = 1.0;
+          item.changefreq = 'daily';
+        } else if (item.url.includes('/guide/features') || item.url.includes('/seo-keywords')) {
+          item.priority = 0.9;
+          item.changefreq = 'weekly';
+        } else if (item.url.includes('/download')) {
+          item.priority = 0.8;
+          item.changefreq = 'weekly';
+        } else {
+          item.priority = 0.7;
+          item.changefreq = 'monthly';
+        }
+        return item;
+      });
+    }
   },
+  head: [
+    ['meta', { name: 'keywords', content: '云剪贴板, 云剪切板, 网络剪贴板, 剪贴板同步, 跨设备剪贴板, 网络粘贴板, 在线剪贴板, 实时同步剪贴板, Windows Mac 剪贴板, 跨操作系统剪贴板, OCR剪贴板, 数据加密剪贴板, 多标签管理剪贴板' }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:title', content: 'Paste Newbee云剪贴板 - 全球唯一跨系统实时同步' }],
+    ['meta', { property: 'og:description', content: '全球首款支持跨操作系统、跨设备实时同步的云剪贴板，高颜值界面，OCR识别，数据加密保护' }],
+    ['meta', { property: 'og:url', content: 'https://www.nbhive.com' }],
+    ['meta', { property: 'og:image', content: 'https://www.nbhive.com/logo.png' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: 'Paste Newbee云剪贴板 - 全球唯一跨系统实时同步' }],
+    ['meta', { name: 'twitter:description', content: 'Paste Newbee云剪贴板，支持Windows/Mac实时同步，OCR识别，多标签管理' }],
+    ['meta', { name: 'twitter:image', content: 'https://www.nbhive.com/logo.png' }],
+    ['link', { rel: 'canonical', href: 'https://www.nbhive.com' }]
+  ],
   themeConfig: {
     logo: "/logo.png",
+    nav: [
+      { text: "主页", link: "/" },
+      { text: "剪贴板指南", link: "/guide/getting-started" },
+      { text: "功能特性", link: "/guide/features" },
+      { text: "问题解答", link: "/question" },
+      { text: "下载", link: "/download" },
+      { text: "更新日志", link: "/changelog" },
+    ],
+    sidebar: {
+      "/guide/": [
+        {
+          text: "云剪贴板介绍",
+          items: [
+            { text: "快速开始", link: "/guide/getting-started" },
+            { text: "核心功能", link: "/guide/features" },
+            { text: "技术特点", link: "/guide/tech" },
+            { text: "关键词详解", link: "/seo-keywords" },
+          ],
+        },
+        {
+          text: "使用指南",
+          items: [
+            { text: "基础使用", link: "/guide/basic-usage" },
+            { text: "高级功能", link: "/guide/advanced" },
+            { text: "常见问题", link: "/guide/faq" },
+          ],
+        },
+      ],
+    },
+    footer: {
+      message: "NewbeeHive",
+      copyright: "Copyright © 2024 深圳市长柠科技有限公司 ｜ <a href='https://beian.miit.gov.cn/' target='_blank' rel='noopener'>粤ICP备2025448714号-1</a>",
+    },
+    outline: [1, 2],
+    outlineTitle: '本页导航'
   },
   appearance: {
 

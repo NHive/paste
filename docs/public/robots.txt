@@ -1,0 +1,24 @@
+# robots.txt for Paste Newbee 云剪贴板
+User-agent: *
+Allow: /
+Allow: /guide/
+Allow: /download
+Allow: /changelog
+Allow: /seo-keywords
+
+# 优先索引关键页面
+Sitemap: https://www.nbhive.com/sitemap.xml
+
+# 重要页面优先级
+# / - 主页 (云剪贴板)
+# /guide/features - 功能介绍
+# /seo-keywords - 关键词详解
+# /download - 下载页面
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1

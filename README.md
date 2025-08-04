@@ -43,8 +43,8 @@ The website documentation is organized in the `/docs` directory. It contains use
 
 ## Official Links
 
-- Website: [https://paste.nbhive.com](https://paste.nbhive.com)
-- Download: [https://paste.nbhive.com/zh-cn/download](https://paste.nbhive.com/zh-cn/download)
+- Website: [https://www.nbhive.com](https://www.nbhive.com)
+- Download: [https://www.nbhive.com/zh-cn/download](https://www.nbhive.com/zh-cn/download)
 - Contact: support@nbhive.com
 
 ## License

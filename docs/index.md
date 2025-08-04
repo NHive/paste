@@ -1,54 +1,91 @@
 ---
 layout: home
-title: "Free Smart Clipboard Manager with Cross-Device Sync"
-description: "Professional clipboard manager offering free real-time sync across Windows, Mac, Linux & iOS. Features cloud sync, smart categorization, and secure data management."
+title: "Paste Newbee云剪贴板 - 全球唯一跨设备实时同步 | 云剪切板/网络剪贴板/在线剪贴板工具"
+description: "Paste Newbee 是全球唯一支持跨操作系统、跨设备实时同步文本、图片、文件的云剪贴板应用。完美支持Windows/Mac云剪切板同步，移动端开发中。具备OCR识别、多标签管理、全流程数据加密的网络剪贴板工具，颜值与功能并存。"
 head:
   - - meta
     - name: keywords
-      content: Paste Newbee, clipboard manager, cross-platform sync, clipboard history, clipboard sync windows mac, productivity software
-
+      content: 云剪贴板, 云剪切板, 网络剪贴板, 剪贴板同步, 跨设备剪贴板, 网络粘贴板, 在线剪贴板, 实时同步剪贴板, Windows Mac 剪贴板, 多端同步剪贴板, Paste Newbee, OCR剪贴板, 数据加密剪贴板, 跨操作系统剪贴板
 hero:
   name: "Paste Newbee"
-  text: "Smart Clipboard Manager"
-  tagline: Making data synchronization simpler and smarter across all your devices
+  text: "跨设备云剪贴板"
+  tagline: 实时同步 · 高颜值界面 · 数据加密 · 跨设备无缝协作
   image:
     src: /logo.png
-    alt: Paste Newbee Logo
+    alt: Paste Newbee 全球唯一跨设备云剪切板LOGO
+    style: "max-width: 550px"
   actions:
     - theme: brand
-      text: English
-      link: /en
+      text: 免费下载
+      link: /download
     - theme: alt
-      text: 简体中文
-      link: /zh-cn
-    - theme: alt
-      text: 繁體中文
-      link: /zh-hk
-
+      text: 查看功能
+      link: /guide/features
 features:
   - icon: 🔄
-    title: Cross-Device Sync
-    details: Free real-time clipboard synchronization across Windows, Mac, Linux, and iOS devices
-
+    title: 全球唯一跨系统云剪贴板
+    details: 全球首款支持跨操作系统、跨设备实时同步文本、图片、文件的网络剪贴板。Windows、Mac原生集成，移动端开发中，真正实现无缝跨设备协作。
   - icon: 📋
-    title: Smart Categories
-    details: Intelligent content categorization with customizable rules and permanent history
-
-  - icon: 🎨
-    title: Modern Design
-    details: Beautiful interface with light/dark themes and intuitive user experience
-
-  - icon: ⚡
-    title: High Performance
-    details: Optimized for speed and efficiency, even with large amounts of data
-
+    title: 全能格式云剪切板支持
+    details: 完美兼容纯文本、富文本、图片、文件等内容类型，内置OCR识别功能。智能预览功能提供直观展示，并支持追踪来源应用和时间。
   - icon: 🔐
-    title: Privacy Focused
-    details: Local storage with optional cloud sync, you're in control of your data
+    title: 全流程数据加密保护
+    details: 独有的剪贴板安全管理系统，全流程数据加密，保障用户隐私安全。支持同步权限限制和关键词过滤，确保数据始终在您的掌控之中。
+  - icon: ⚡
+    title: 多标签管理专业工具
+    details: 完善的多标签管理系统，内置全局快捷键、即时预览、智能搜索、窗口固定等实用功能，专为高效工作而设计的在线剪贴板。
+  - icon: 🎨
+    title: 超高颜值现代化设计
+    details: 业界领先的高颜值界面设计，支持浅色/深色主题，系统托盘常驻，简洁直观的交互体验，支持多语言环境的网络粘贴板。
+  - icon: ☁️
+    title: 实时云端同步功能
+    details: 提供账号系统、设备管理、文件云同步、在线状态监测、通知推送等多种云端协作能力，打造最专业的云剪贴板体验。
+why:
+  title: 为什么选择 Paste Newbee 云剪贴板？
+  items:
+    - title: 全球独有技术突破
+      details: 全球唯一支持跨操作系统、跨设备实时同步的云剪切板，核心功能永久免费，持续技术创新，提供 API 接口支持个性化扩展。
+    - title: 超高颜值用户体验
+      details: 业界领先的高颜值界面设计，网络剪贴板操作体验极致流畅，支持离线复制、联网同步，提升跨平台办公协作效率。
+    - title: 全格式OCR智能识别
+      details: 支持文本、图片、代码、文件等格式，内置OCR识别功能，具备链接识别、代码高亮和格式化展示能力的在线剪贴板。
+    - title: 多标签智能管理
+      details: 完善的多标签管理系统，全局唤起、虚拟滚动、海量记录查询、强大搜索过滤，网络粘贴板操作简洁高效。
+    - title: 极致现代化设计
+      details: 超高颜值界面，支持个性主题、定制快捷键、响应式 UI 设计，操作体验舒适现代的云剪贴板工具。
+    - title: 全流程安全加密
+      details: 独有剪贴板安全管理，全程端到端加密，敏感信息支持过滤规则，本地加密存储，确保数据安全可靠。
 
-  - icon: 🌐
-    title: Multi-Language
-    details: Available in English, Simplified Chinese, and Traditional Chinese
-
-footer: MIT Licensed | Copyright © 2024 NBHIVE Team | Paste Newbee
+footer: Copyright © 2024 深圳市长柠科技有限公司 ｜ Paste Newbee 免费智能剪贴板 ｜ <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">粤ICP备2025448714号-1</a>
 ---
+
+## ✨ 产品介绍
+
+**Paste Newbee** 是全球唯一一款支持跨操作系统、跨设备、做到实时同步文本、图片、文件的云剪贴板应用。作为业界领先的网络剪贴板工具，支持 Windows、Mac 原生集成实时同步，移动端正在开发中。
+
+### 🌟 独有优势
+
+- **全球独有技术**：唯一支持跨操作系统实时同步的云剪切板
+- **超高颜值设计**：业界领先的现代化界面设计
+- **OCR智能识别**：内置OCR功能，智能识别图片文字
+- **多标签管理**：完善的多标签管理系统
+- **全流程加密**：剪贴板安全管理，保障用户隐私安全
+
+### 🎯 适合用户
+
+- 追求高效率的程序员、设计师、内容创作者
+- 需要跨设备协作的多设备办公用户  
+- 注重数据安全的企业和个人用户
+- 对界面颜值有要求的现代化办公人群
+
+### 🚀 快速开始
+
+点击上方 "免费下载云剪贴板" 按钮，安装并注册账号，即可体验全球唯一的跨系统云剪贴板，实现 Windows、Mac 等多端实时同步，真正做到随时随地跨设备无缝办公。
+
+### 🛠 技术支持
+
+我们支持 API 对接与定制开发，满足不同企业和开发者的个性化需求。作为专业的网络剪贴板解决方案提供商，如需帮助，请联系官方团队获取技术支持。
+
+---
+
+> 💡 **Paste Newbee** 不仅是云剪贴板工具，更是全球首款跨操作系统实时同步的在线剪贴板变革者，提升的不只是复制粘贴的效率，更是跨平台内容流转的智能化变革。
