@@ -13,7 +13,7 @@ export default defineConfig({
         if (item.url === '/' || item.url === '/index.html') {
           item.priority = 1.0;
           item.changefreq = 'daily';
-        } else if (item.url.includes('/guide/features') || item.url.includes('/seo-keywords')) {
+        } else if (item.url.includes('/guide/features') || item.url.includes('/question')) {
           item.priority = 0.9;
           item.changefreq = 'weekly';
         } else if (item.url.includes('/download')) {
@@ -58,7 +58,7 @@ export default defineConfig({
             { text: "快速开始", link: "/guide/getting-started" },
             { text: "核心功能", link: "/guide/features" },
             { text: "技术特点", link: "/guide/tech" },
-            { text: "关键词详解", link: "/seo-keywords" },
+            { text: "问答", link: "/question" },
           ],
         },
         {

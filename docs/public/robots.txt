@@ -4,7 +4,7 @@ Allow: /
 Allow: /guide/
 Allow: /download
 Allow: /changelog
-Allow: /seo-keywords
+Allow: /question
 
 # 优先索引关键页面
 Sitemap: https://www.nbhive.com/sitemap.xml
@@ -12,7 +12,7 @@ Sitemap: https://www.nbhive.com/sitemap.xml
 # 重要页面优先级
 # / - 主页 (云剪贴板)
 # /guide/features - 功能介绍
-# /seo-keywords - 关键词详解
+# /question - 问答
 # /download - 下载页面
 
 User-agent: Baiduspider
