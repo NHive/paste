@@ -234,3 +234,47 @@
   color: var(--vp-c-text-1);
   margin-bottom: 12px;
 }
+
+/*========================= 白天模式 =========================*/
+:root {
+  /* ---------- 全局内联代码 `code` ---------- */
+  --vp-code-color: #098f40;                 /* 深绿字体，比纯黑柔和 */
+  --vp-code-bg: rgba(255, 245, 200, 0.6);  /* 浅黄背景，呼应 Logo */
+
+  /* ---------- 全局代码块 ```code``` ---------- */
+  --vp-code-block-color: #098f40;           /* 深绿字体 */
+  --vp-code-block-bg: rgba(255, 245, 200, 0.6); /* 浅米黄背景 */
+
+  /* ---------- 选中代码文本 ---------- */
+  --vp-code-selection-bg: rgba(212, 185, 62, 0.25); /* 品牌黄淡色 */
+
+  /* ---------- tip 内内联代码 ---------- */
+  --vp-custom-block-tip-code-color: #098f40;      /* 深绿字体 */
+  --vp-custom-block-tip-code-bg: rgba(255, 245, 200, 0.6); /* 浅黄背景 */
+
+  /* ---------- tip 内代码块（```code```） ---------- */
+  --vp-custom-block-tip-code-block-color: #098f40;
+  --vp-custom-block-tip-code-block-bg: rgba(255, 245, 200, 0.6);
+}
+
+/*========================= 夜间模式 =========================*/
+.dark {
+  /* ---------- 全局内联代码 `code` ---------- */
+  --vp-code-color: #ffe26a;                  /* 高亮柔黄 */
+  --vp-code-bg: rgba(255, 255, 140, 0.15);   /* 浅黄透明背景 */
+
+  /* ---------- 全局代码块 ```code``` ---------- */
+  --vp-code-block-color: #e6e6e6;            /* 高亮灰白 */
+  --vp-code-block-bg: rgba(40, 40, 40, 1);   /* 深灰背景，减少光污染 */
+
+  /* ---------- 选中代码文本 ---------- */
+  --vp-code-selection-bg: rgba(248, 218, 82, 0.4);
+
+  /* ---------- tip 内内联代码 ---------- */
+  --vp-custom-block-tip-code-color: #ffe26a;
+  --vp-custom-block-tip-code-bg: rgba(255, 255, 140, 0.15);
+
+  /* ---------- tip 内代码块（```code```） ---------- */
+  --vp-custom-block-tip-code-block-color: #e6e6e6;
+  --vp-custom-block-tip-code-block-bg: rgba(40, 40, 40, 1);
+}
