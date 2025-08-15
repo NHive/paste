@@ -38,7 +38,15 @@ export default defineConfig({
     ['meta', { name: 'twitter:title', content: 'Paste Newbee云剪贴板 - 全球唯一跨系统实时同步' }],
     ['meta', { name: 'twitter:description', content: 'Paste Newbee云剪贴板，支持Windows/Mac实时同步，OCR识别，多标签管理' }],
     ['meta', { name: 'twitter:image', content: 'https://www.nbhive.com/logo.png' }],
-    ['link', { rel: 'canonical', href: 'https://www.nbhive.com' }]
+    ['link', { rel: 'canonical', href: 'https://www.nbhive.com' }],
+    // Microsoft Clarity tracking code
+    ['script', {}, `
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "st8fnsiq78");
+    `]
   ],
   themeConfig: {
     logo: "/logo.png",
