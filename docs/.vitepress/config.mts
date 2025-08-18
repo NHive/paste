@@ -57,6 +57,7 @@ export default defineConfig({
       { text: "问题解答", link: "/question" },
       { text: "下载", link: "/download" },
       { text: "更新日志", link: "/changelog" },
+      { text: "🎉 活动", link: "/activity" },
     ],
     sidebar: {
       "/guide/": [
