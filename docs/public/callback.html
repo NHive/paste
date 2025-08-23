@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Callback</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .spinner {
+            border: 2px solid #f0f0f0;
+            border-top: 2px solid #007aff;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .status-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .success-icon {
+            background: #28cd41;
+            color: white;
+        }
+
+        .error-icon {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="spinner" id="spinner"></div>
+        <div class="status-icon success-icon hidden" id="success-icon">✓</div>
+        <div class="status-icon error-icon hidden" id="error-icon">✕</div>
+    </div>
+
+    <script>
+        // 是否启用调试模式（生产环境可以设为false）
+        const DEBUG = true;
+
+        function debugLog(...args) {
+            if (DEBUG) {
+                console.log('[OAuth Callback]', ...args);
+            }
+        }
+
+        function debugError(...args) {
+            if (DEBUG) {
+                console.error('[OAuth Callback Error]', ...args);
+            }
+        }
+        function updateStatus(message, type = 'info') {
+            const spinner = document.getElementById('spinner');
+            const successIcon = document.getElementById('success-icon');
+            const errorIcon = document.getElementById('error-icon');
+
+            // 隐藏所有状态图标
+            spinner.classList.add('hidden');
+            successIcon.classList.add('hidden');
+            errorIcon.classList.add('hidden');
+
+            // 显示对应的状态图标
+            if (type === 'success') {
+                successIcon.classList.remove('hidden');
+            } else if (type === 'error') {
+                errorIcon.classList.remove('hidden');
+            } else {
+                spinner.classList.remove('hidden');
+            }
+        }
+
+        function updateInfo(message) {
+            // 不再显示文字信息
+        }
+
+        function parseState(stateParam) {
+            try {
+                // state 格式: {provider}_{base64_encoded_target}_{random}
+                // 例如: "apple_dGF1cmk6Ly9sb2NhbGhvc3QjL2xvZ2lu_abc123"
+
+                const parts = stateParam.split('_');
+                if (parts.length !== 3) {
+                    throw new Error('Invalid state format, expected: provider_base64Target_random');
+                }
+
+                const provider = parts[0];
+                const encodedTarget = parts[1];
+                const random = parts[2];
+
+                // Base64解码target
+                let target;
+                try {
+                    target = decodeURIComponent(atob(encodedTarget));
+                } catch (decodeError) {
+                    console.warn('Failed to decode base64 target, trying direct decode:', decodeError);
+                    target = decodeURIComponent(encodedTarget);
+                }
+
+                return {
+                    provider: provider,
+                    target: target,
+                    random: random
+                };
+
+            } catch (e) {
+                console.error('Error parsing state:', e);
+                return {
+                    provider: 'unknown',
+                    target: 'tauri://localhost#/login',
+                    random: null
+                };
+            }
+        }
+
+        function getProviderDisplayName(provider) {
+            switch (provider) {
+                case 'apple': return 'Apple ID';
+                case 'wechat': return '微信';
+                case 'github': return 'GitHub';
+                case 'google': return 'Google';
+                case 'microsoft': return 'Microsoft';
+                case 'facebook': return 'Facebook';
+                case 'twitter': return 'Twitter';
+                case 'linkedin': return 'LinkedIn';
+                default: return '第三方账号';
+            }
+        }
+
+        function buildRedirectUrl(baseUrl, params) {
+            try {
+                // 验证baseUrl是否为有效URL格式
+                if (!baseUrl || typeof baseUrl !== 'string') {
+                    throw new Error('Invalid base URL');
+                }
+
+                // 处理 hash 路由
+                if (baseUrl.includes('#')) {
+                    const [base, hash] = baseUrl.split('#');
+                    const url = new URL(base);
+
+                    // 添加查询参数
+                    Object.keys(params).forEach(key => {
+                        if (params[key] !== null && params[key] !== undefined) {
+                            url.searchParams.set(key, params[key]);
+                        }
+                    });
+
+                    return url.toString() + '#' + hash;
+                } else {
+                    const url = new URL(baseUrl);
+                    Object.keys(params).forEach(key => {
+                        if (params[key] !== null && params[key] !== undefined) {
+                            url.searchParams.set(key, params[key]);
+                        }
+                    });
+                    return url.toString();
+                }
+            } catch (e) {
+                console.error('Error building redirect URL:', e);
+
+                // 更安全的fallback处理
+                try {
+                    const paramString = Object.keys(params)
+                        .filter(key => params[key] !== null && params[key] !== undefined)
+                        .map(key => `${key}=${encodeURIComponent(params[key])}`)
+                        .join('&');
+
+                    if (!paramString) return baseUrl;
+
+                    const separator = baseUrl.includes('?') ? '&' : '?';
+                    return baseUrl + separator + paramString;
+                } catch (fallbackError) {
+                    console.error('Fallback URL building also failed:', fallbackError);
+                    return baseUrl; // 最后的fallback，至少返回原URL
+                }
+            }
+        }
+
+        function redirectToApp(targetUrl, params) {
+            const redirectUrl = buildRedirectUrl(targetUrl, params);
+
+            // 延迟一下让用户看到成功图标
+            setTimeout(() => {
+                try {
+                    window.location.href = redirectUrl;
+                } catch (e) {
+                    console.error('Redirect error:', e);
+                    updateStatus('', 'error');
+                }
+            }, 1500);
+        }
+
+        // 主处理逻辑
+        function handleOAuthCallback() {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+                const error = urlParams.get('error');
+                const errorDescription = urlParams.get('error_description');
+                const stateParam = urlParams.get('state');
+
+                debugLog('OAuth callback params:', { code: !!code, error, state: stateParam });
+
+                // 添加超时处理，防止页面卡住
+                setTimeout(() => {
+                    if (!document.getElementById('spinner').classList.contains('hidden')) {
+                        updateStatus('', 'error');
+                        debugError('OAuth callback timeout');
+
+                        // 超时也要尝试重定向
+                        if (stateParam) {
+                            const { provider, target, random } = parseState(stateParam);
+                            setTimeout(() => {
+                                redirectToApp(target, {
+                                    error: 'callback_timeout',
+                                    provider: provider,
+                                    state_random: random
+                                });
+                            }, 1000);
+                        }
+                    }
+                }, 10000); // 10秒超时
+
+                if (!stateParam) {
+                    updateStatus('', 'error');
+                    return;
+                }
+
+                const { provider, target, random } = parseState(stateParam);
+
+                debugLog('Parsed state:', { provider, target, random });
+
+                if (error) {
+                    updateStatus('', 'error');
+                    console.error('OAuth error:', { error, errorDescription });
+
+                    // 即使失败也要重定向回应用，传递错误信息
+                    setTimeout(() => {
+                        redirectToApp(target, {
+                            error: error,
+                            error_description: errorDescription || 'Unknown error',
+                            provider: provider,
+                            state_random: random
+                        });
+                    }, 2000);
+
+                } else if (code) {
+                    updateStatus('', 'success');
+
+                    redirectToApp(target, {
+                        code: code,
+                        provider: provider,
+                        state_random: random
+                    });
+
+                } else {
+                    updateStatus('', 'error');
+
+                    setTimeout(() => {
+                        redirectToApp(target, {
+                            error: 'no_code_received',
+                            provider: provider,
+                            state_random: random
+                        });
+                    }, 2000);
+                }
+
+            } catch (e) {
+                console.error('Callback handling error:', e);
+                updateStatus('', 'error');
+            }
+        }
+
+        // 页面加载完成后开始处理
+        document.addEventListener('DOMContentLoaded', function () {
+            // 短暂延迟，让用户看到加载状态
+            setTimeout(handleOAuthCallback, 500);
+        });
+
+        // 如果 DOMContentLoaded 已经触发，直接执行
+        if (document.readyState === 'loading') {
+            // 文档还在加载中，等待 DOMContentLoaded
+        } else {
+            // 文档已经加载完成
+            setTimeout(handleOAuthCallback, 500);
+        }
+    </script>
+</body>
+
+</html>

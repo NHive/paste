@@ -9,7 +9,7 @@ layout: false
     "@type": "SoftwareApplication",
     "name": "Paste Newbee",
     "alternateName": ["云剪贴板", "云剪切板", "网络剪贴板", "在线剪贴板", "网络粘贴板"],
-    "description": "全球唯一支持跨操作系统、跨设备实时同步文本、图片、文件的云剪贴板应用。支持Windows/Mac云剪切板同步，内置OCR、多标签管理、全流程数据加密的网络剪贴板工具。",
+    "description": "支持跨操作系统、跨设备实时同步文本、图片、文件的云剪贴板应用。支持Windows/Mac云剪切板同步，内置OCR、多标签管理、全流程数据加密的网络剪贴板工具。",
     "url": "https://www.nbhive.com",
     "downloadUrl": "https://www.nbhive.com/download",
     "screenshot": "https://www.nbhive.com/logo.png",

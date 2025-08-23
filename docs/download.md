@@ -1,5 +1,7 @@
 ---
 aside: false
+title: 下载剪贴板管理器 - Paste Newbee
+description: 为Windows和macOS下载最新版本的Paste Newbee剪贴板管理器。获取这款强大的剪贴板管理软件，享受跨设备同步的便利。
 ---
 
 <script setup>
