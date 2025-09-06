@@ -52,9 +52,9 @@ export default defineConfig({
     logo: "/logo.png",
     nav: [
       { text: "主页", link: "/" },
-      { text: "剪贴板指南", link: "/guide/getting-started" },
+      { text: "指南", link: "/guide/getting-started" },
       { text: "功能特性", link: "/guide/features" },
-      { text: "问题解答", link: "/question" },
+      { text: "常见问题", link: "/question" },
       { text: "下载", link: "/download" },
       { text: "更新日志", link: "/changelog" },
       { text: "🎉 活动", link: "/activity" },
@@ -82,7 +82,7 @@ export default defineConfig({
     },
     footer: {
       message: "NewbeeHive",
-      copyright: "Copyright © 2024 深圳市长柠科技有限公司 ｜ <a href='https://beian.miit.gov.cn/' target='_blank' rel='noopener'>粤ICP备2025448714号-1</a>",
+      copyright: "Copyright © 2024 深圳市长柠科技有限公司 ｜ <a href='https://beian.miit.gov.cn/' target='_blank' rel='noopener'>粤ICP备2025448714号-1</a> ｜ <a href='/privacy-policy'>隐私协议</a> ｜ <a href='/terms-of-service'>用户协议</a>",
     },
     outline: [1, 2],
     outlineTitle: '本页导航'
