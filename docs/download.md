@@ -39,6 +39,11 @@ const handleDownload = (url, platform) => {
     window.location.href = withBase(`/download-complete.html?platform=${platform}`)
   }, 3000)
 }
+
+// macOS App Store 下载函数
+const handleMacOSDownload = () => {
+  window.open('https://apps.apple.com/cn/app/paste-newbee/id6744024453', '_blank')
+}
 </script>
 
 ## 选择您的平台
@@ -73,8 +78,8 @@ const handleDownload = (url, platform) => {
       <li>支持 Apple Silicon/Intel</li>
       <li>自动更新</li>
     </ul>
-    <a @click.prevent="handleDownload(releaseInfo.macos.url, 'macos')" class="download-button">
-      下载 macOS 版本
+    <a @click.prevent="handleMacOSDownload()" class="download-button">
+      前往 App Store 下载
     </a>
   </div>
 </div>
