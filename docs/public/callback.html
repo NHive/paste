@@ -181,6 +181,28 @@
                     throw new Error('Invalid base URL');
                 }
 
+                debugLog('构建重定向URL - baseUrl:', baseUrl, 'params:', params);
+
+                // 检测是否为自定义协议（如 paste://、newbee-paste://）
+                const isCustomScheme = baseUrl.startsWith('paste://') ||
+                    baseUrl.startsWith('newbee-paste://') ||
+                    (!baseUrl.startsWith('http://') && !baseUrl.startsWith('https://'));
+
+                if (isCustomScheme) {
+                    // 自定义协议：直接拼接参数
+                    const paramString = Object.keys(params)
+                        .filter(key => params[key] !== null && params[key] !== undefined)
+                        .map(key => `${key}=${encodeURIComponent(params[key])}`)
+                        .join('&');
+
+                    if (!paramString) return baseUrl;
+
+                    const separator = baseUrl.includes('?') ? '&' : '?';
+                    const finalUrl = baseUrl + separator + paramString;
+                    debugLog('自定义协议重定向URL:', finalUrl);
+                    return finalUrl;
+                }
+
                 // 处理 hash 路由
                 if (baseUrl.includes('#')) {
                     const [base, hash] = baseUrl.split('#');
@@ -225,11 +247,70 @@
         }
 
         function redirectToApp(targetUrl, params) {
-            const redirectUrl = buildRedirectUrl(targetUrl, params);
+            debugLog('开始处理 OAuth 回调');
+            debugLog('目标URL:', targetUrl);
+            debugLog('回调参数:', params);
 
-            // 延迟一下让用户看到成功图标
+            // ============================================
+            // 主要机制：使用 postMessage 与父窗口通信
+            // 这是开发和生产环境统一使用的方式
+            // ============================================
+            if (window.opener && !window.opener.closed) {
+                debugLog('检测到父窗口 (opener)，使用 postMessage 通信');
+
+                try {
+                    // 构建 OAuth 回调消息
+                    const messageData = {
+                        type: 'oauth-callback',
+                        ...params
+                    };
+
+                    debugLog('发送消息数据:', messageData);
+
+                    // 使用通配符 origin，因为 Tauri 应用可能使用各种协议
+                    // 安全性由消息内容的 type 字段来保证
+                    window.opener.postMessage(messageData, '*');
+                    debugLog('postMessage 发送成功');
+
+                    // 显示成功状态
+                    updateStatus('', 'success');
+
+                    // 延迟关闭窗口，让用户看到成功状态
+                    setTimeout(() => {
+                        debugLog('关闭弹出窗口');
+                        window.close();
+                    }, 1500);
+
+                    return; // postMessage 成功，不需要兜底重定向
+
+                } catch (e) {
+                    debugError('postMessage 通信失败:', e);
+                    // 继续尝试兜底方案
+                }
+            }
+
+            // ============================================
+            // 兜底机制：URL 重定向
+            // 仅当 postMessage 不可用时使用（如非弹出窗口模式）
+            // ============================================
+            debugLog('没有检测到父窗口或 postMessage 失败，使用 URL 重定向兜底');
+
+            const redirectUrl = buildRedirectUrl(targetUrl, params);
+            debugLog('兜底重定向URL:', redirectUrl);
+
+            // 检测目标是否为自定义协议
+            const isCustomScheme = targetUrl.startsWith('paste://') ||
+                targetUrl.startsWith('newbee-paste://');
+
+            updateStatus('', 'success');
+
             setTimeout(() => {
                 try {
+                    if (isCustomScheme) {
+                        debugLog('使用 deep-link 协议重定向');
+                    } else {
+                        debugLog('使用标准 HTTP 重定向');
+                    }
                     window.location.href = redirectUrl;
                 } catch (e) {
                     console.error('Redirect error:', e);
