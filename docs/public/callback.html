@@ -251,6 +251,11 @@
             debugLog('目标URL:', targetUrl);
             debugLog('回调参数:', params);
 
+            const messageData = {
+                type: 'oauth-callback',
+                ...params
+            };
+
             // ============================================
             // 主要机制：使用 postMessage 与父窗口通信
             // 这是开发和生产环境统一使用的方式
@@ -259,12 +264,6 @@
                 debugLog('检测到父窗口 (opener)，使用 postMessage 通信');
 
                 try {
-                    // 构建 OAuth 回调消息
-                    const messageData = {
-                        type: 'oauth-callback',
-                        ...params
-                    };
-
                     debugLog('发送消息数据:', messageData);
 
                     // 使用通配符 origin，因为 Tauri 应用可能使用各种协议
@@ -286,6 +285,20 @@
                 } catch (e) {
                     debugError('postMessage 通信失败:', e);
                     // 继续尝试兜底方案
+                }
+            }
+
+            if (window.parent && window.parent !== window) {
+                debugLog('检测到父页面 (parent frame)，使用 postMessage 通信');
+
+                try {
+                    debugLog('发送消息数据:', messageData);
+                    window.parent.postMessage(messageData, '*');
+                    debugLog('postMessage 发送到父页面成功');
+                    updateStatus('', 'success');
+                    return;
+                } catch (e) {
+                    debugError('向父页面 postMessage 失败:', e);
                 }
             }
 
