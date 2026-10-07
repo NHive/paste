@@ -1,0 +1,6 @@
+# Keep Pages production and immutable preview hosts out of search results.
+https://newbeesite.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.newbeesite.pages.dev/*
+  X-Robots-Tag: noindex

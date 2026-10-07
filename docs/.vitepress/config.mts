@@ -1,4 +1,14 @@
-import { defineConfig } from "vitepress";
+import { defineConfig, type HeadConfig } from "vitepress";
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+
+const primaryOrigin = "https://www.nbhive.com";
+function canonicalPath(source: string) {
+  const route = "/" + source.replace(/^\//, "")
+    .replace(/(^|\/)index\.(md|html)$/, "$1")
+    .replace(/\.(md|html)$/, "");
+  return route === "/en/" || route === "/en" ? "/" : route;
+}
 
 // 英文配置
 const enConfig = {
@@ -6,7 +16,7 @@ const enConfig = {
   description: "Paste is no longer maintained. Download ArcRelay Suite.",
   themeConfig: {
     nav: [
-      { text: "Home", link: "/en" },
+      { text: "Home", link: "/" },
       { text: "Archived Guide", link: "/en/guide/getting-started" },
       { text: "Archived Features", link: "/en/guide/features" },
       { text: "Download ArcRelay", link: "https://arcrelay.app/en/products/arcrelay#downloads" },
@@ -116,12 +126,37 @@ const hkConfig = {
 
 // 配置导出
 export default defineConfig({
+  cleanUrls: true,
+  transformHead({ page }) {
+    if (page === "404.md") return [["meta", { name: "robots", content: "noindex" }]];
+  },
+  transformPageData(pageData, { siteConfig }) {
+    if (pageData.relativePath === "404.md") {
+      pageData.frontmatter.head = [["meta", { name: "robots", content: "noindex" }]];
+      return;
+    }
+    const canonical = primaryOrigin + canonicalPath(pageData.relativePath);
+    const head: HeadConfig[] = [
+      ["link", { rel: "canonical", href: canonical }],
+      ["meta", { property: "og:url", content: canonical }],
+    ];
+    const suffix = pageData.relativePath.replace(/^(en|zh-cn|zh-hk)\//, "");
+    for (const [locale, language] of [["en", "en"], ["zh-cn", "zh-CN"], ["zh-hk", "zh-HK"]]) {
+      if (existsSync(resolve(siteConfig.srcDir, locale, suffix))) {
+        const href = primaryOrigin + canonicalPath(`${locale}/${suffix}`);
+        head.push(["link", { rel: "alternate", hreflang: language, href }]);
+        if (locale === "en") head.push(["link", { rel: "alternate", hreflang: "x-default", href }]);
+      }
+    }
+    // Page data also updates the head during client-side navigation.
+    pageData.frontmatter.head = [...(pageData.frontmatter.head || []), ...head];
+  },
   // 多语言配置
   locales: {
     root: {
       label: "English",
       lang: "en",
-      link: "/en",
+      link: "/",
       ...enConfig,
     },
     "zh-cn": {
@@ -138,7 +173,17 @@ export default defineConfig({
     },
   },
   sitemap: {
-    hostname: "https://www.nbhive.com",
+    hostname: primaryOrigin,
+    transformItems(items) {
+      const seen = new Set<string>();
+      return items.flatMap(item => {
+        const url = canonicalPath(item.url);
+        if (url === "/404" || seen.has(url)) return [];
+        seen.add(url);
+        // Language alternatives are emitted in HTML; list only canonical URLs.
+        return [{ url }];
+      });
+    },
   },
   themeConfig: {
     logo: "/logo.png",

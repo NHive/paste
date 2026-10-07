@@ -28,6 +28,12 @@ Jenkins job `nbhive-website` reads `Jenkinsfile` from `main`, polls for changes,
 
 Production URLs: [www.nbhive.com](https://www.nbhive.com), [www.nbhive.cn](https://www.nbhive.cn).
 
+## Search canonicalization
+
+www.nbhive.com is the preferred search domain. Every HTML page identifies its corresponding .com canonical URL and existing language alternatives. www.nbhive.cn remains accessible with cross-domain canonicals. The sitemap and robots.txt use only canonical .com URLs; Pages normalizes legacy .html paths to extensionless URLs.
+
+The English home is /; /en and /en/ permanently redirect there. Host-scoped X-Robots-Tag: noindex rules exclude Pages production and version preview hosts without blocking either www domain. Search engines apply these signals after recrawling.
+
 ## Copyright
 
 Copyright © 2024 NBHIVE Team. All rights reserved. The Paste application is not open source; ArcRelay's source and license are managed separately.
