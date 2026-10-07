@@ -37,3 +37,7 @@ The English home is /; /en and /en/ permanently redirect there. Host-scoped X-Ro
 ## Copyright
 
 Copyright © 2024 NBHIVE Team. All rights reserved. The Paste application is not open source; ArcRelay's source and license are managed separately.
+
+## Developer portfolio
+
+Localized product pages live at `/en/products`, `/zh-cn/products` and `/zh-hk/products`. See [the linking policy](docs-linking-policy.md) for editorial, ownership and monthly review rules.
