@@ -63,7 +63,9 @@ async function verifyPublic() {
       try {
         const response = await fetch(`${base}/en/download?revision=${encodeURIComponent(process.env.REVISION)}`);
         const html = await response.text();
-        if (response.ok && html === expected) {
+        // Pages injects its existing public analytics beacon into HTML responses.
+        const normalized = html.replace(/<!-- Cloudflare Pages Analytics -->[\s\S]*?<!-- Cloudflare Pages Analytics -->/g, '');
+        if (response.ok && normalized === expected) {
           fs.writeFileSync('evidence/pages-download.html',html);
           verified=true; break;
         }
