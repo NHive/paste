@@ -1,36 +1,21 @@
-name: Deploy VitePress to Cloudflare Pages
-
+name: Verify VitePress website
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
-    name: Deploy to Cloudflare Pages
-    permissions:
-      contents: read
-      deployments: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
-          cache: 'npm'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build VitePress Site
-        run: npm run docs:build
-
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy docs/.vitepress/dist --project-name=newbeesite
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run docs:build
+      - run: npm run verify:site
+# Production publishing is owned by Jenkins using its existing Cloudflare credentials.

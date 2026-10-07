@@ -137,6 +137,16 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+.migration-notice {
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+.migration-notice p { margin: 0 0 8px; }
+.migration-notice a { color: var(--vp-c-text-1); text-decoration: underline; font-weight: 600; }
+
 /* 下载卡片容器 */
 .download-cards {
   display: grid;

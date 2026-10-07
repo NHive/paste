@@ -1,54 +1,30 @@
 ---
 layout: home
-title: "Free Smart Clipboard Manager with Cross-Device Sync"
-description: "Professional clipboard manager offering free real-time sync across Windows, Mac, Linux & iOS. Features cloud sync, smart categorization, and secure data management."
-head:
-  - - meta
-    - name: keywords
-      content: Paste Newbee, clipboard manager, cross-platform sync, clipboard history, clipboard sync windows mac, productivity software
-
+title: "Paste's next chapter: ArcRelay"
+description: "Paste is no longer maintained. Development continues with ArcRelay, an open-source, LAN-first app for sharing clipboard content, files, and input across trusted devices."
 hero:
   name: "Paste Newbee"
-  text: "Smart Clipboard Manager"
-  tagline: Making data synchronization simpler and smarter across all your devices
+  text: "Paste's next chapter: ArcRelay"
+  tagline: "Paste is no longer maintained. Development continues with ArcRelay, an open-source, LAN-first app for sharing clipboard content, files, and input across trusted devices."
   image:
     src: /logo.png
-    alt: Paste Newbee Logo
+    alt: Paste Newbee
   actions:
     - theme: brand
-      text: English
-      link: /en
+      text: "Download ArcRelay"
+      link: https://arcrelay.app/en/products/arcrelay#downloads
     - theme: alt
-      text: 简体中文
-      link: /zh-cn
+      text: "Migration and platform support"
+      link: /en/download
     - theme: alt
-      text: 繁體中文
-      link: /zh-hk
-
-features:
-  - icon: 🔄
-    title: Cross-Device Sync
-    details: Free real-time clipboard synchronization across Windows, Mac, Linux, and iOS devices
-
-  - icon: 📋
-    title: Smart Categories
-    details: Intelligent content categorization with customizable rules and permanent history
-
-  - icon: 🎨
-    title: Modern Design
-    details: Beautiful interface with light/dark themes and intuitive user experience
-
-  - icon: ⚡
-    title: High Performance
-    details: Optimized for speed and efficiency, even with large amounts of data
-
-  - icon: 🔐
-    title: Privacy Focused
-    details: Local storage with optional cloud sync, you're in control of your data
-
-  - icon: 🌐
-    title: Multi-Language
-    details: Available in English, Simplified Chinese, and Traditional Chinese
-
-footer: MIT Licensed | Copyright © 2024 NBHIVE Team | Paste Newbee
+      text: "Archived Paste guide"
+      link: /en/guide/getting-started
 ---
+
+## Download ArcRelay Suite
+
+Current official desktop installers cover Windows and macOS. Check the ArcRelay website for architectures, system requirements, and other platform availability.
+
+## Do my data and account transfer automatically?
+
+Automatic history import, shared accounts, and existing subscription transfers have not been confirmed. Keep a backup of your Paste data before changing applications.

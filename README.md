@@ -1,52 +1,33 @@
-# Paste Newbee
+# Paste website archive
 
 English | [中文](README-ZH.md)
 
-This repository contains the website for Paste Newbee - a smart clipboard synchronization tool that supports Windows, macOS, and iOS platforms.
+Paste is no longer maintained. Its successor is [ArcRelay](https://arcrelay.app/en/products/arcrelay#downloads), an open-source application for cross-device use on a local network. This repository preserves the Paste guides and sends all new downloads to ArcRelay.
 
-## About Paste Newbee
+The archived documentation describes the old Paste service. It does not establish compatibility or migration of accounts, history, or subscriptions to ArcRelay. Existing users can contact support@nbhive.com.
 
-Paste Newbee is an intelligent clipboard tool that provides real-time synchronization across multiple devices. It supports various content formats including text, rich text, images, and files.
+## Development
 
-Key features:
+Use Node.js 24:
 
-- Cross-device real-time synchronization
-- Support for multiple formats (text, images, files)
-- Intelligent categorization and search
-- Privacy protection and security
-- Modern UI with light/dark theme support
+```bash
+npm ci
+npm run docs:build
+npm run verify:site
+npm run docs:dev
+```
 
-## Repository Purpose
+## Deployment
 
-**Note: This is NOT an open-source project.**
+Jenkins job `nbhive-website` reads `Jenkinsfile` from `main`, polls for changes, builds and verifies the site, and publishes to Cloudflare Pages project `newbeesite`. Existing Jenkins credentials `cf-account-id` and `cf-pages-api-token` supply authentication. GitHub Actions performs build verification only.
 
-This repository is primarily used for:
+- `DEPLOY_PRODUCTION=true` publishes verified main (default). Set false for a build-only check.
+- `SYNC_DOMAINS=true` associates www.nbhive.com and www.nbhive.cn with Pages, and switches only the expected www.nbhive.com CNAME. This is normally false.
+- www.nbhive.cn uses its existing external DNS provider; update its www CNAME after Pages domain association.
+- Jenkins archives `evidence/cloudflare-before.json`, including the prior production deployment and www record for rollback. Restore the previous DNS record to return to the old host, or roll back the Pages deployment in Cloudflare.
 
-- Collecting feature requests
-- Tracking bugs and issues
-- Managing documentation content
-- Website development
+Production URLs: [www.nbhive.com](https://www.nbhive.com), [www.nbhive.cn](https://www.nbhive.cn).
 
-## How to Submit Feedback
+## Copyright
 
-If you encounter any issues or have feature requests:
-
-1. Open a new issue in this repository
-2. Use the appropriate template (Bug Report or Feature Request)
-3. Provide detailed information about your environment and the problem
-
-For urgent issues, please contact our support team directly at support@nbhive.com
-
-## Documentation
-
-The website documentation is organized in the `/docs` directory. It contains user guides, FAQs, and technical information about Paste Newbee.
-
-## Official Links
-
-- Website: [https://www.nbhive.com](https://www.nbhive.com)
-- Download: [https://www.nbhive.com/zh-cn/download](https://www.nbhive.com/zh-cn/download)
-- Contact: support@nbhive.com
-
-## License
-
-Copyright © 2024 NBHIVE Team. All rights reserved.
+Copyright © 2024 NBHIVE Team. All rights reserved. The Paste application is not open source; ArcRelay's source and license are managed separately.

@@ -1,0 +1,53 @@
+export const migration = {
+  "en": {
+    "title": "Paste's next chapter: ArcRelay",
+    "description": "Paste is no longer maintained. Development continues with ArcRelay, an open-source, LAN-first app for sharing clipboard content, files, and input across trusted devices.",
+    "button": "Download ArcRelay",
+    "learn": "Migration and platform support",
+    "archive": "Archived Paste guide",
+    "note": "Paste is no longer maintained. This page documents the old application.",
+    "lang": "en",
+    "platform": "Current official desktop installers cover Windows and macOS. Check the ArcRelay website for architectures, system requirements, and other platform availability.",
+    "migration": "Do my data and account transfer automatically?",
+    "answer": "Automatic history import, shared accounts, and existing subscription transfers have not been confirmed. Keep a backup of your Paste data before changing applications.",
+    "download": "Download ArcRelay Suite",
+    "source": "View source code",
+    "footer": "Paste is no longer maintained. Downloads continue on ArcRelay.",
+    "lifecycle": "From Paste to ArcRelay",
+    "link": "https://arcrelay.app/en/products/arcrelay#downloads"
+  },
+  "zh-cn": {
+    "title": "Paste 的下一站：ArcRelay",
+    "description": "Paste 已停止维护，后续开发转向 ArcRelay。ArcRelay 是开源、局域网优先的跨设备协同应用，让剪贴板、文件与键鼠在可信设备之间流转。",
+    "button": "前往下载 ArcRelay",
+    "learn": "迁移与平台支持",
+    "archive": "旧版 Paste 指南（已归档）",
+    "note": "Paste 已停止维护。这是旧版应用的归档文档。",
+    "lang": "zh",
+    "platform": "当前正式桌面安装包覆盖 Windows 和 macOS。架构、系统要求及其他平台的发行状态，请以 ArcRelay 官网为准。",
+    "migration": "历史数据与账号会自动迁移吗？",
+    "answer": "目前尚未确认历史记录自动导入、账号共用或旧订阅权益迁移。切换应用前请保留 Paste 数据备份；现有权益问题可联系 support@nbhive.com 咨询。",
+    "download": "下载 ArcRelay Suite",
+    "source": "查看源代码",
+    "footer": "Paste 已停止维护，下载入口已转向 ArcRelay。",
+    "lifecycle": "从 Paste 到 ArcRelay",
+    "link": "https://arcrelay.app/zh/products/arcrelay#downloads"
+  },
+  "zh-hk": {
+    "title": "Paste 的下一站：ArcRelay",
+    "description": "Paste 已停止維護，後續開發轉向 ArcRelay。ArcRelay 是開源、區域網路優先的跨裝置協作應用，讓剪貼簿、檔案與鍵鼠在可信裝置之間流轉。",
+    "button": "前往下載 ArcRelay",
+    "learn": "遷移與平台支援",
+    "archive": "舊版 Paste 指南（已封存）",
+    "note": "Paste 已停止維護。這是舊版應用的封存文件。",
+    "lang": "zh",
+    "platform": "目前正式桌面安裝包涵蓋 Windows 與 macOS。架構、系統要求及其他平台的發行狀態，請以 ArcRelay 官網為準（此入口提供簡體中文）。",
+    "migration": "歷史資料與帳號會自動遷移嗎？",
+    "answer": "目前尚未確認歷史記錄自動匯入、帳號共用或舊訂閱權益遷移。切換應用前請保留 Paste 資料備份；現有權益問題可聯絡 support@nbhive.com 諮詢。",
+    "download": "下載 ArcRelay Suite",
+    "source": "查看原始碼",
+    "footer": "Paste 已停止維護，下載入口已轉向 ArcRelay。",
+    "lifecycle": "從 Paste 到 ArcRelay",
+    "link": "https://arcrelay.app/zh/products/arcrelay#downloads"
+  }
+} as const;

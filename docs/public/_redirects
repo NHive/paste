@@ -1,2 +1,5 @@
-/*  /zh-cn/:splat  302  Language=zh
-/*  /zh-hk/:splat  302  Language=zh-hk
+/download /en/download 302
+/download.html /en/download 302
+/zh-cn/dex.html /zh-cn/ 301
+/en/dex.html /en/ 301
+/zh-hk/dex.html /zh-hk/ 301

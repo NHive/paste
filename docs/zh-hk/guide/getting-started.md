@@ -8,7 +8,7 @@
 
 首先，您需要根據您的操作系統下載對應的 NewbeePaste 安裝包。
 
-<a href="/zh-hk/download.html" class="VPButton vp-button_brand">前往下載頁面</a>
+<a href="https://arcrelay.app/zh/products/arcrelay#downloads" class="VPButton vp-button_brand">前往下載 ArcRelay</a>
 
 ### 2. 系統要求
 

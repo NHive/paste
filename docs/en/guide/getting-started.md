@@ -8,7 +8,7 @@ Welcome to NewbeePaste! This guide will walk you through the installation, basic
 
 First, download the appropriate installation package for your operating system.
 
-<a href="/en/download.html" class="VPButton vp-button_brand">Go to Download Page</a>
+<a href="https://arcrelay.app/en/products/arcrelay#downloads" class="VPButton vp-button_brand">Download ArcRelay</a>
 
 ### 2. System Requirements
 

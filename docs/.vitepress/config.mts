@@ -3,13 +3,13 @@ import { defineConfig } from "vitepress";
 // 英文配置
 const enConfig = {
   title: "NewbeePaste",
-  description: "Real-time clipboard sync across devices",
+  description: "Paste is no longer maintained. Download ArcRelay Suite.",
   themeConfig: {
     nav: [
       { text: "Home", link: "/en" },
-      { text: "Guide", link: "/en/guide/getting-started" },
-      { text: "Features", link: "/en/guide/features" },
-      { text: "Download", link: "/en/download" },
+      { text: "Archived Guide", link: "/en/guide/getting-started" },
+      { text: "Archived Features", link: "/en/guide/features" },
+      { text: "Download ArcRelay", link: "https://arcrelay.app/en/products/arcrelay#downloads" },
     ],
     sidebar: {
       "/en/guide/": [
@@ -32,7 +32,7 @@ const enConfig = {
       ],
     },
     footer: {
-      message: "NewbeeHive",
+      message: "NewbeeHive · Paste → ArcRelay",
       copyright: "Copyright © 2024-present NewbeePaste",
     },
   },
@@ -41,13 +41,13 @@ const enConfig = {
 // 中文配置
 const zhConfig = {
   title: "NewbeePaste",
-  description: "多设备跨平台实时同步剪贴板工具",
+  description: "Paste 已停止维护，后续开发转向 ArcRelay。",
   themeConfig: {
     nav: [
       { text: "主页", link: "/zh-cn" },
-      { text: "指南", link: "/zh-cn/guide/getting-started" },
-      { text: "功能", link: "/zh-cn/guide/features" },
-      { text: "下载", link: "/zh-cn/download" },
+      { text: "旧版指南", link: "/zh-cn/guide/getting-started" },
+      { text: "旧版功能", link: "/zh-cn/guide/features" },
+      { text: "下载 ArcRelay", link: "https://arcrelay.app/zh/products/arcrelay#downloads" },
     ],
     sidebar: {
       "/zh-cn/guide/": [
@@ -70,7 +70,7 @@ const zhConfig = {
       ],
     },
     footer: {
-      message: "NewbeeHive",
+      message: "NewbeeHive · Paste → ArcRelay",
       copyright: "Copyright © 2024-present NewbeePaste",
     },
   },
@@ -79,13 +79,13 @@ const zhConfig = {
 // 繁體中文配置
 const hkConfig = {
   title: "NewbeePaste",
-  description: "多設備跨平台實時同步剪貼板工具",
+  description: "Paste 已停止維護，後續開發轉向 ArcRelay。",
   themeConfig: {
     nav: [
       { text: "主頁", link: "/zh-hk" },
-      { text: "指南", link: "/zh-hk/guide/getting-started" },
-      { text: "功能", link: "/zh-hk/guide/features" },
-      { text: "下載", link: "/zh-hk/download" },
+      { text: "舊版指南", link: "/zh-hk/guide/getting-started" },
+      { text: "舊版功能", link: "/zh-hk/guide/features" },
+      { text: "下載 ArcRelay", link: "https://arcrelay.app/zh/products/arcrelay#downloads" },
     ],
     sidebar: {
       "/zh-hk/guide/": [
@@ -108,7 +108,7 @@ const hkConfig = {
       ],
     },
     footer: {
-      message: "NewbeeHive",
+      message: "NewbeeHive · Paste → ArcRelay",
       copyright: "Copyright © 2024-present NewbeePaste",
     },
   },

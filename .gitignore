@@ -1,2 +1,5 @@
 node_modules
 dist
+.DS_Store
+docs/.vitepress/cache/
+evidence/

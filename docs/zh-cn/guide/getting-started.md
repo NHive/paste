@@ -8,7 +8,7 @@
 
 首先，您需要根据您的操作系统下载对应的 Paste 安装包。
 
-<a href="/zh-cn/download.html" class="VPButton vp-button_brand">前往下载页面</a>
+<a href="https://arcrelay.app/zh/products/arcrelay#downloads" class="VPButton vp-button_brand">前往下载 ArcRelay</a>
 
 ### 2. 系统要求
 
