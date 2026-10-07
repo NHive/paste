@@ -5,7 +5,7 @@ description: "Explore ArcRelay for LAN collaboration, StarScan for document scan
 
 # Software for everyday work
 
-These products come from the same developer and focus on different tasks. Choose the app that fits what you need; each product website explains its own availability, pricing, support and legal terms.
+From collaborating across devices to scanning documents and organizing receipts, these apps help with different parts of everyday work.
 
 ## ArcRelay — collaborate across your own devices
 
@@ -24,7 +24,3 @@ StarScan is a document scanning app for a global audience, with no ads and no wa
 Stareceipt focuses on receipts rather than general document scanning. It helps people organize purchase records and expenses, including users in Canada, the United States and other supported markets. Choose it when keeping track of receipts matters more than creating a general-purpose PDF.
 
 [Explore Stareceipt receipt organization](https://www.stareceipt.com/). Its official website provides product details, supported markets and current plans.
-
-## Product rights and support
-
-This is a developer portfolio, not a shared legal entity. Each product keeps its own rights, terms and support channels. Stareceipt does not belong to Shenzhen Changning Technology Co., Ltd. For privacy, licensing and support, follow the relevant product's official website.
