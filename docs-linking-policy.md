@@ -10,3 +10,5 @@
 - Rollback: remove inbound links before removing portfolio routes; revert source and publish through existing Jenkins, retaining archived Paste URLs and canonical domain rules.
 
 References: [Google link spam policy](https://developers.google.com/search/docs/essentials/spam-policies#link-spam) and [canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls).
+
+Public portfolio and About copy describes product tasks and useful related apps. Ownership and support boundaries are maintenance guidance; do not repeat them as disclaimers in product recommendations. Existing legal pages and copyright notices remain authoritative.
