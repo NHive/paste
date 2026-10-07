@@ -48,9 +48,36 @@ async function attachDomains() {
   }
   console.log(JSON.stringify({domains:await api(`${projectPath}/domains`), external_dns:['www.nbhive.com','www.nbhive.cn'].map(name => ({name,type:'CNAME',target}))}));
 }
+async function verifyPublic() {
+  const p = await api(projectPath);
+  const deployment = p.canonical_deployment;
+  if (!deployment?.url?.endsWith('.pages.dev')) throw new Error('Production deployment URL is missing');
+  if (deployment.deployment_trigger?.metadata?.commit_hash !== process.env.REVISION) {
+    throw new Error('Production deployment revision does not match this Jenkins checkout');
+  }
+  const urls = [deployment.url, `https://${p.subdomain}`];
+  const expected = fs.readFileSync('docs/.vitepress/dist/en/download.html','utf8');
+  for (const base of urls) {
+    let verified = false;
+    for (let attempt=0; attempt<12; attempt++) {
+      try {
+        const response = await fetch(`${base}/en/download?revision=${encodeURIComponent(process.env.REVISION)}`);
+        const html = await response.text();
+        if (response.ok && html === expected) {
+          fs.writeFileSync('evidence/pages-download.html',html);
+          verified=true; break;
+        }
+      } catch { /* Retry transient deployment propagation or network failures. */ }
+      if (attempt<11) await new Promise(resolve => setTimeout(resolve,3000));
+    }
+    if (!verified) throw new Error(`Public deployment verification failed for ${base}`);
+    console.log(`Verified current build at ${base}/en/download`);
+  }
+}
 const command = process.argv[2];
 if (command === 'snapshot') await snapshot();
 else if (command === 'ensure-project') await ensureProject();
+else if (command === 'verify-public') await verifyPublic();
 else if (command === 'attach-domains') await attachDomains();
 else if (command === 'status') {
   const p=await api(projectPath);

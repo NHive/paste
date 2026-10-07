@@ -55,16 +55,8 @@ node scripts/cloudflare-pages.mjs snapshot
 node scripts/cloudflare-pages.mjs ensure-project
 ./node_modules/.bin/wrangler pages deploy docs/.vitepress/dist \
   --project-name=newbeesite --branch=main --commit-hash="${REVISION}"
-# Check the deployment before custom-domain or DNS mutation.
-curl --connect-timeout 10 --max-time 30 --retry 3 --retry-delay 5 -fsSL \
-  https://newbeesite.pages.dev/en/download -o evidence/pages-download.html
-python3 - <<'PY'
-from pathlib import Path
-body = Path('evidence/pages-download.html').read_text()
-assert 'https://arcrelay.app/en/products/arcrelay#downloads' in body
-assert 'releases.czbrcj.cn/api/v1/release/paste/latest' not in body
-print('Pages public download path verified')
-PY
+# Pages may acknowledge deployment before the production hostname serves it.
+node scripts/cloudflare-pages.mjs verify-public
 '''
                 script {
                     if (params.SYNC_DOMAINS) {
