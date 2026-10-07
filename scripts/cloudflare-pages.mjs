@@ -8,6 +8,7 @@ const projectPath = `/accounts/${encodeURIComponent(account)}/pages/projects/${p
 async function api(path, method = 'GET', body, allowMissing = false) {
   const response = await fetch(`https://api.cloudflare.com/client/v4${path}`, {
     method,
+    signal: AbortSignal.timeout(15000),
     headers: {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'},
     ...(body ? {body: JSON.stringify(body)} : {}),
   });
@@ -44,7 +45,9 @@ async function attachDomains() {
   if (!target || !target.endsWith('.pages.dev')) throw new Error('Unexpected Pages hostname');
   const domains = await api(`${projectPath}/domains`);
   for (const name of ['www.nbhive.com','www.nbhive.cn']) {
-    if (!domains.some(d => d.name === name)) await api(`${projectPath}/domains`, 'POST', {name});
+    const domain = domains.find(d => d.name === name);
+    if (!domain) await api(`${projectPath}/domains`, 'POST', {name});
+    else if (domain.status !== 'active') await api(`${projectPath}/domains/${name}`, 'PATCH');
   }
   console.log(JSON.stringify({domains:await api(`${projectPath}/domains`), external_dns:['www.nbhive.com','www.nbhive.cn'].map(name => ({name,type:'CNAME',target}))}));
 }
@@ -61,7 +64,7 @@ async function verifyPublic() {
     let verified = false;
     for (let attempt=0; attempt<12; attempt++) {
       try {
-        const response = await fetch(`${base}/en/download?revision=${encodeURIComponent(process.env.REVISION)}`);
+        const response = await fetch(`${base}/en/download?revision=${encodeURIComponent(process.env.REVISION)}`, {signal: AbortSignal.timeout(15000)});
         const html = await response.text();
         // Pages injects its existing public analytics beacon into HTML responses.
         const normalized = html.replace(/<!-- Cloudflare Pages Analytics -->[\s\S]*?<!-- Cloudflare Pages Analytics -->/g, '');
