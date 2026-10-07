@@ -22,9 +22,9 @@ npm run docs:dev
 Jenkins job `nbhive-website` reads `Jenkinsfile` from `main`, polls for changes, builds and verifies the site, and publishes to Cloudflare Pages project `newbeesite`. Existing Jenkins credentials `cf-account-id` and `cf-pages-api-token` supply authentication. GitHub Actions performs build verification only.
 
 - `DEPLOY_PRODUCTION=true` publishes verified main (default). Set false for a build-only check.
-- `SYNC_DOMAINS=true` associates www.nbhive.com and www.nbhive.cn with Pages, and switches only the expected www.nbhive.com CNAME. This is normally false.
+- `SYNC_DOMAINS=true` associates www.nbhive.com and www.nbhive.cn with Pages, DNS changes are handled separately. This is normally false.
 - www.nbhive.cn uses its existing external DNS provider; update its www CNAME after Pages domain association.
-- Jenkins archives `evidence/cloudflare-before.json`, including the prior production deployment and www record for rollback. Restore the previous DNS record to return to the old host, or roll back the Pages deployment in Cloudflare.
+- Jenkins archives `evidence/cloudflare-before.json`, including the prior production deployment for rollback. DNS records are backed up separately before switching. Restore the previous DNS record to return to the old host, or roll back the Pages deployment in Cloudflare.
 
 Production URLs: [www.nbhive.com](https://www.nbhive.com), [www.nbhive.cn](https://www.nbhive.cn).
 

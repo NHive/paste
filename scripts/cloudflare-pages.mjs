@@ -20,10 +20,6 @@ async function api(path, method = 'GET', body, allowMissing = false) {
 }
 async function snapshot() {
   const existing = await api(projectPath, 'GET', undefined, true);
-  const zones = await api(`/zones?name=nbhive.com&account.id=${encodeURIComponent(account)}`);
-  if (zones.length !== 1) throw new Error('Expected exactly one accessible nbhive.com zone');
-  const zone = zones[0];
-  const records = await api(`/zones/${zone.id}/dns_records?name=www.nbhive.com`);
   const domains = existing ? await api(`${projectPath}/domains`) : [];
   const evidence = {
     checked_at: new Date().toISOString(), project,
@@ -31,8 +27,6 @@ async function snapshot() {
     previous_production: existing?.canonical_deployment?.id ?? null,
     project_subdomain: existing?.subdomain ?? null,
     source_type: existing?.source?.type ?? 'direct-upload',
-    zone_id: zone.id,
-    records: records.map(({id, type, name, content, ttl, proxied}) => ({id, type, name, content, ttl, proxied})),
     domains: domains.map(({name, status}) => ({name, status})),
   };
   fs.mkdirSync('evidence', {recursive:true});
@@ -45,27 +39,14 @@ async function ensureProject() {
   console.log(JSON.stringify({project:existing.name, subdomain:existing.subdomain, production_branch:existing.production_branch}));
 }
 async function attachDomains() {
-  const prior = JSON.parse(fs.readFileSync('evidence/cloudflare-before.json','utf8'));
   const existing = await api(projectPath);
   const target = existing.subdomain;
   if (!target || !target.endsWith('.pages.dev')) throw new Error('Unexpected Pages hostname');
-  const records = await api(`/zones/${prior.zone_id}/dns_records?name=www.nbhive.com`);
-  if (records.length !== 1 || records[0].type !== 'CNAME') throw new Error('Expected one www CNAME; refusing broader DNS changes');
-  const current = records[0];
-  const validOld = '6db540e2.www.nbhive.com.dns.edgeone.app';
-  if (![validOld,target].includes(current.content.replace(/\.$/,''))) throw new Error('www.nbhive.com has an unexpected target; review required');
   const domains = await api(`${projectPath}/domains`);
   for (const name of ['www.nbhive.com','www.nbhive.cn']) {
     if (!domains.some(d => d.name === name)) await api(`${projectPath}/domains`, 'POST', {name});
   }
-  // Re-read because Pages may create or update DNS while attaching the custom domain.
-  const fresh = await api(`/zones/${prior.zone_id}/dns_records?name=www.nbhive.com`);
-  if (fresh.length !== 1 || fresh[0].type !== 'CNAME') throw new Error('Unexpected www state after Pages domain association');
-  if (fresh[0].content.replace(/\.$/,'') !== target) {
-    if (fresh[0].content.replace(/\.$/,'') !== validOld) throw new Error('www DNS changed concurrently; refusing overwrite');
-    await api(`/zones/${prior.zone_id}/dns_records/${fresh[0].id}`, 'PATCH', {type:'CNAME',name:'www.nbhive.com',content:target,ttl:1,proxied:true});
-  }
-  console.log(JSON.stringify({domains:await api(`${projectPath}/domains`), external_dns:{name:'www.nbhive.cn',type:'CNAME',target}}));
+  console.log(JSON.stringify({domains:await api(`${projectPath}/domains`), external_dns:['www.nbhive.com','www.nbhive.cn'].map(name => ({name,type:'CNAME',target}))}));
 }
 const command = process.argv[2];
 if (command === 'snapshot') await snapshot();

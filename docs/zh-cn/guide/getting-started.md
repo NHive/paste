@@ -6,7 +6,7 @@
 
 ### 1. 下载安装包
 
-首先，您需要根据您的操作系统下载对应的 Paste 安装包。
+Paste 已停止维护，新安装请前往 ArcRelay；以下步骤仅描述旧版 Paste 的使用方式。
 
 <a href="https://arcrelay.app/zh/products/arcrelay#downloads" class="VPButton vp-button_brand">前往下载 ArcRelay</a>
 

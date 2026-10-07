@@ -10,7 +10,7 @@ pipeline {
     triggers { pollSCM('H/5 * * * *') }
     parameters {
         booleanParam(name: 'DEPLOY_PRODUCTION', defaultValue: true, description: 'Publish verified main to Cloudflare Pages')
-        booleanParam(name: 'SYNC_DOMAINS', defaultValue: false, description: 'After Pages verification, associate both www domains and switch only www.nbhive.com DNS')
+        booleanParam(name: 'SYNC_DOMAINS', defaultValue: false, description: 'After Pages verification, associate both www domains; DNS changes are handled separately')
     }
     stages {
         stage('Checkout') {

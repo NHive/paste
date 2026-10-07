@@ -22,9 +22,9 @@ npm run docs:dev
 Jenkins 任务 `nbhive-website` 从 `main` 读取 `Jenkinsfile`，轮询代码变更，构建、校验后发布到 Cloudflare Pages 项目 `newbeesite`。鉴权复用 Jenkins 的 `cf-account-id`、`cf-pages-api-token`，GitHub Actions 仅负责构建校验。
 
 - `DEPLOY_PRODUCTION=true`：发布校验通过的 main，默认为 true；设为 false 时仅构建。
-- `SYNC_DOMAINS=true`：将两个 www 域名关联到 Pages，并仅切换预期的 www.nbhive.com CNAME；平时保持 false。
+- `SYNC_DOMAINS=true`：将两个 www 域名关联到 Pages，DNS 记录另行备份、预览和切换；平时保持 false。
 - www.nbhive.cn 保留现有外部 DNS 服务商，在关联 Pages 后切换 www CNAME。
-- Jenkins 归档 `evidence/cloudflare-before.json`，保存原生产部署及 www 记录。恢复原 DNS 记录可回到原托管平台，内容回退可在 Cloudflare 中回滚 Pages 部署。
+- Jenkins 归档 `evidence/cloudflare-before.json`，保存原生产部署；DNS 记录在切换前单独备份。恢复原 DNS 记录可回到原托管平台，内容回退可在 Cloudflare 中回滚 Pages 部署。
 
 官网：[www.nbhive.com](https://www.nbhive.com)、[www.nbhive.cn](https://www.nbhive.cn)。
 

@@ -6,7 +6,7 @@ Welcome to NewbeePaste! This guide will walk you through the installation, basic
 
 ### 1. Download Installation Package
 
-First, download the appropriate installation package for your operating system.
+Paste is no longer maintained. New installations are available through ArcRelay; the remaining steps below describe archived Paste behavior.
 
 <a href="https://arcrelay.app/en/products/arcrelay#downloads" class="VPButton vp-button_brand">Download ArcRelay</a>
 
