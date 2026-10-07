@@ -17,6 +17,7 @@ const enConfig = {
   themeConfig: {
     nav: [
       { text: "Home", link: "/" },
+      { text: "Other products", link: "/en/products" },
       { text: "Archived Guide", link: "/en/guide/getting-started" },
       { text: "Archived Features", link: "/en/guide/features" },
       { text: "Download ArcRelay", link: "https://arcrelay.app/en/products/arcrelay#downloads" },
@@ -55,6 +56,7 @@ const zhConfig = {
   themeConfig: {
     nav: [
       { text: "主页", link: "/zh-cn" },
+      { text: "其他产品", link: "/zh-cn/products" },
       { text: "旧版指南", link: "/zh-cn/guide/getting-started" },
       { text: "旧版功能", link: "/zh-cn/guide/features" },
       { text: "下载 ArcRelay", link: "https://arcrelay.app/zh/products/arcrelay#downloads" },
@@ -93,6 +95,7 @@ const hkConfig = {
   themeConfig: {
     nav: [
       { text: "主頁", link: "/zh-hk" },
+      { text: "其他產品", link: "/zh-hk/products" },
       { text: "舊版指南", link: "/zh-hk/guide/getting-started" },
       { text: "舊版功能", link: "/zh-hk/guide/features" },
       { text: "下載 ArcRelay", link: "https://arcrelay.app/zh/products/arcrelay#downloads" },

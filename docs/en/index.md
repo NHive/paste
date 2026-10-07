@@ -28,3 +28,7 @@ Current official desktop installers cover Windows and macOS. Check the ArcRelay 
 ## Do my data and account transfer automatically?
 
 Automatic history import, shared accounts, and existing subscription transfers have not been confirmed. Keep a backup of your Paste data before changing applications.
+
+## More software by the same developer
+
+[Explore ArcRelay, StarScan and Stareceipt, and choose the app that fits your task.](/en/products)

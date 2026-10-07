@@ -28,3 +28,7 @@ hero:
 ## 歷史資料與帳號會自動遷移嗎？
 
 目前尚未確認歷史記錄自動匯入、帳號共用或舊訂閱權益遷移。切換應用前請保留 Paste 資料備份；現有權益問題可聯絡 support@nbhive.com 諮詢。
+
+## 開發者的其他作品
+
+[了解 ArcRelay、StarScan 和 Stareceipt，按用途選擇適合自己的應用。](/zh-hk/products)
